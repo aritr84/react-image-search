@@ -1,0 +1,110 @@
+PICS app --
+
+step 1- 
+    - make get request to unsplash API
+step 2-
+    - understand the data flow
+        
+----------------------------------------
+Making HTTP request using axios - 
+
+axios.get(url,{
+    headers:{
+        Headers that we want to add into the request
+    },
+    params:{
+        Key-value pairs that will be turned into a query string and added to the URL
+    }
+})
+
+-------------------------------
+Data flow - 
+
+explained in diagrams - 
+Child to Parent Communications - 
+
+In Event system - 
+eventhandler is declared in Parent
+and to detect an "click" event --> we will pass onClick prop to the Button Element (Child) 
+
+when event handler function is called "event" flows back from child to parent 
+
+we will use this technique while communicating data from child to parent
+
+
+step 1 - make callback function (like handleSubmit)
+step 2 - pass that callback to onSubmit(user defined, it can be named any thing) as a prop
+step 3 - when user press enter --> call the props.onSubmit() and pass the current search term as event
+step 4 - magically "term" will flow to parent component
+step 5 - we will call searchImages(term) into handleSubmit
+step 6 - we will going to have images into App component
+step 7 - we will send that data to ImageList component using normal "Props"
+ez..
+
+-----------------------------------------
+
+
+
+-----------------------------------------
+How to detect the enter key press
+- wrapping input element within form elements 
+- browser will automatically detect enter press as it detect an submit event
+
+- when a form is submited --> 
+    - Default behaviour is that it collects that data and pass makes network call to same url 
+    eg- input element - emailId
+        URL - myapp.com
+        after submit event is detected
+        by default form will make network request like this
+        myapp.com?emailId=abcd@abc.com
+
+    - to prevent this in React 
+        - we will use the "event" in the eventhandler
+        - event.preventDefault() will stop the form to make default network calls.
+
+--------------------------------------------------
+How to Detect data from input Components-
+
+NEVER use direct query selector to get data from FORM ELEMENTS like input, radio, selections
+    - document.querySelector("input").value() XXXXXXXX
+    - it will get the data but this technique is not correct in case of react
+
+Correct way - 
+
+step 1 - create a piece of state
+step 2 - eventhandler to monitor onChange event
+step 3 - when onChange event fires get the value from the input
+step 4 - take that value from the input to update the state
+step 5 - pass your state to the input value = {stateName} as a prop
+
+onChange event- whenevr user makes changes like 
+adding text, deleting text, cut, paste,etc
+
+# hardcoding the value prop of input element - 
+<input value="abcd" onChange={handleChange} />
+we will not be able to type or change inside the input element
+
+----------------------------------------------
+
+Communicating The array of images down to Image ImageList
+
+- Combine state system and prop system
+    why?
+    - after doing the search we want to "update the content" on the screen
+
+------------------------------------------------
+why we apply key property during map?
+-- watch video lecture 77 again
+
+-- just apply key during map function
+-- any time we are having a list of elements we are going to use the key prop
+    <ImageShow key={image.id} image={image}/>
+
+-- add the topmost element that is being duplicated
+-- keys must be string or a number
+-- key should be consistent while re rendering
+
+-- Incase we dont have a id -
+    -- use index of the record --> may result in bugs.
+    -- generate a unique ID ourselves --> later in the course.
+-----------------------------------------------
