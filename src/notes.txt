@@ -1,10 +1,12 @@
 PICS app --
 
-step 1- 
-    - make get request to unsplash API
-step 2-
-    - understand the data flow
-        
+Main Focus of this PICS app was to --
+    - Make API requests using axios
+    - Child to Parent Communication
+    - Detect enter key press in form elements
+    - Get DATA correct way from input element
+    - Key Property while using array.map() function
+       
 ----------------------------------------
 Making HTTP request using axios - 
 
@@ -32,7 +34,7 @@ when event handler function is called "event" flows back from child to parent
 we will use this technique while communicating data from child to parent
 
 
-step 1 - make callback function (like handleSubmit)
+step 1 - make callback function inside parent component (like handleSubmit)
 step 2 - pass that callback to onSubmit(user defined, it can be named any thing) as a prop
 step 3 - when user press enter --> call the props.onSubmit() and pass the current search term as event
 step 4 - magically "term" will flow to parent component
@@ -42,9 +44,6 @@ step 7 - we will send that data to ImageList component using normal "Props"
 ez..
 
 -----------------------------------------
-
-
-
 -----------------------------------------
 How to detect the enter key press
 - wrapping input element within form elements 
@@ -83,8 +82,12 @@ adding text, deleting text, cut, paste,etc
 # hardcoding the value prop of input element - 
 <input value="abcd" onChange={handleChange} />
 we will not be able to type or change inside the input element
+------------------------------------------------------------
+# what is a controlled Input?
 
-----------------------------------------------
+<input value={term} onChange={handleChange} />
+controlled Input is where we provide both value and onChange prop
+----------------------------------------------------------
 
 Communicating The array of images down to Image ImageList
 
@@ -108,3 +111,4 @@ why we apply key property during map?
     -- use index of the record --> may result in bugs.
     -- generate a unique ID ourselves --> later in the course.
 -----------------------------------------------
+
